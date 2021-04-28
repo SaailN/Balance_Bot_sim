@@ -1,0 +1,74 @@
+<?xml version="1.0" ?>
+<!-- Differential drive robot -->
+
+<robot name="balan_bot" xmlns:xacro="http://www.ros.org/wiki/xacro">
+<xacro:include filename="$(find balan_bot)/urdf/materials.xacro" />
+<xacro:include filename="$(find balan_bot)/urdf/base.gazebo" />
+<xacro:include filename="$(find balan_bot)/urdf/macros.xacro" />
+
+<!-- Base of a robot -->
+<xacro:custom_box name="base" b_rpy="0 0 0" b_xyz="0 0 0" b_mass="0.10" b_x="0.16" b_y="0.05" b_z="0.005"  />  
+
+ <!-- left wall support -->
+
+<xacro:custom_box name="left" b_rpy="0 0 0" b_xyz="0 0 0" b_mass="0.10" b_x="0.16" b_y="0.05" b_z="0.005"  />  
+
+<xacro:custom_joint name="base_left" joint_type="fixed" j_axis="0 0 1" j_parent="base" j_child="left" j_rpy="0 1.57 0" j_xyz="0.0775 0 0.0825" />
+
+<xacro:custom_box name="right" b_rpy="0 0 0" b_xyz="0 0 0" b_mass="0.10" b_x="0.16" b_y="0.05" b_z="0.005"  />  
+
+
+<xacro:custom_joint name="base_right" joint_type="fixed" j_axis="0 0 1" j_parent="base" j_child="right" j_rpy="0 1.57 0" j_xyz="-0.0775 0 0.0825" />
+
+
+<xacro:custom_box name="top" b_rpy="0 0 0" b_xyz="0 0 0" b_mass="0.10" b_x="0.16" b_y="0.05" b_z="0.005"  />  
+
+<xacro:custom_joint name="base_top" joint_type="fixed" j_axis="0 0 1" j_parent="base" j_child="top" j_rpy="0 0 0" j_xyz="0 0 0.165" />
+
+<xacro:custom_box name="mid" b_rpy="0 0 0" b_xyz="0 0 0" b_mass="0.10" b_x="0.16" b_y="0.05" b_z="0.005"  />  
+
+<xacro:custom_joint name="base_mid" joint_type="fixed" j_axis="0 0 1" j_parent="base" j_child="mid" j_rpy="0 0 0" j_xyz="0 0 0.085" />
+
+
+
+<!-- left wheel  -->
+<xacro:base_cylinder name="left_wheel" l_rpy="0 1.57 0" l_xyz="0 0 0" mass="0.1" r="0.03" l="0.005"  /> 
+
+<!-- joining left wheel to base -->
+<xacro:custom_joint name="base_left_wheel_joint" joint_type="continuous" j_axis="1 0 0" j_parent="base" j_child="left_wheel" j_rpy="0 0 0" j_xyz="0.086 0 0" />  
+
+<!-- rigt wheel -->
+<xacro:base_cylinder name="right_wheel" l_rpy="0 1.57 0" l_xyz="0 0 0" mass="0.1" r="0.03" l="0.005"  />
+
+<!-- joining right wheel to base -->
+<xacro:custom_joint name="base_right_wheel_joint" joint_type="continuous" j_axis="1 0 0" j_parent="base" j_child="right_wheel" j_rpy="0 0 0" j_xyz="-0.086 0 0" />  
+
+
+<!-- camera -->
+
+<xacro:custom_box name="camera" b_rpy="0 0 0" b_xyz="0 0 0" b_mass="0.010" b_x="0.01" b_y="0.01" b_z="0.01"  />  
+
+<xacro:custom_joint name="camera_fit" joint_type="fixed" j_axis="0 0 1" j_parent="mid" j_child="camera" j_rpy="0 0 0" j_xyz="0 0.025 0.005" />
+
+
+<!-- imu -->
+
+<xacro:custom_box name="imu" b_rpy="0 0 0" b_xyz="0 0 0" b_mass="0.010" b_x="0.01" b_y="0.02" b_z="0.002"  />  
+
+<xacro:custom_joint name="imu_fit" joint_type="fixed" j_axis="0 0 1" j_parent="mid" j_child="imu" j_rpy="0 0 0" j_xyz="0 0 0.005" />
+
+<!-- battery -->
+
+<xacro:custom_box name="battery" b_rpy="0 0 0" b_xyz="0 0 0" b_mass="0.2" b_x="0.04" b_y="0.03" b_z="0.015"  />  
+
+<xacro:custom_joint name="battery_fit" joint_type="fixed" j_axis="0 0 1" j_parent="top" j_child="battery" j_rpy="0 0 0" j_xyz="0 0 0.01" />
+
+</robot>
+
+
+
+
+
+
+
+
